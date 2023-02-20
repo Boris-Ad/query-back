@@ -18,7 +18,6 @@ export const createTodo = async (req: Request, res: Response) => {
 
 export const getTodo = async (req: Request, res: Response) => {
   const id = req.params.id;
-  res.json(req.query);
   try {
     const todo = await db.query(`SELECT * FROM todos WHERE todo_id = $1`, [id]);
     res.json(todo.rows[0]);
