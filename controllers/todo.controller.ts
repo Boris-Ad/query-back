@@ -42,10 +42,7 @@ export const getTodos = async (req: Request, res: Response) => {
 
 export const updateTodo = async (req: Request, res: Response) => {
   const { id, completed } = req.body as {id : number, completed : boolean};
-  const check = id && completed
-  if(!check) {
-    return res.status(400)
-  }
+
   try {
     const todo = await db.query(`UPDATE todos SET completed = $1  WHERE todo_id = $2 RETURNING *`, [completed, id]);
     res.json(todo.rows[0]);
